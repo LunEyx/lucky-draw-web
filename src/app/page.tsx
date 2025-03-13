@@ -4,7 +4,7 @@ import { AuthProvider, useAuth } from "react-oidc-context";
 const cognitoAuthConfig = {
   authority: "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_eHKU6HdFR",
   client_id: "78asrfssbhr20i95rsjes57dhd",
-  redirect_uri: "http://localhost:3000/inventory",
+  redirect_uri: "http://localhost:3000",
   response_type: "code",
   scope: "email openid",
 };
