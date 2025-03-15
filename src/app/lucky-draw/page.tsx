@@ -1,13 +1,16 @@
-import LuckyDrawBox from '@/components/LuckyDrawBox'
+import { Center } from "styled-system/jsx"
+import { fetchLuckyPoints } from "@/services/user"
+import LuckyDrawPool from "./LuckyDrawPool"
+import Image from 'next/image'
+import SorryImg from '@/assets/sorry.png'
 
 const LuckyDrawPage = async () => {
-  const response = await fetch(`${process.env.API_URL}/prizes`)
-  const prizes = (await response.json()).default
+  const luckyPoints = await fetchLuckyPoints()
 
   return (
-    <div>
-      <LuckyDrawBox prizes={prizes} />
-    </div>
+    <Center h="100%">
+      <LuckyDrawPool luckyPoints={luckyPoints} />
+    </Center>
   )
 }
 
