@@ -1,31 +1,26 @@
 'use client'
-import { AuthProvider, useAuth } from "react-oidc-context";
-
-const cognitoAuthConfig = {
-  authority: "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_eHKU6HdFR",
-  client_id: "78asrfssbhr20i95rsjes57dhd",
-  redirect_uri: "http://localhost:3000",
-  response_type: "code",
-  scope: "email openid",
-};
-
-const Container = () => {
-  return (
-    <AuthProvider {...cognitoAuthConfig}>
-      <UserLogin />
-    </AuthProvider>
-  )
-}
+import { useAuth } from "react-oidc-context";
+import { Box } from "styled-system/jsx";
+import { Button } from "./ui/button";
 
 const UserLogin = () => {
   const auth = useAuth();
 
   const signOutRedirect = () => {
-    const clientId = "78asrfssbhr20i95rsjes57dhd";
+    const clientId = '5800gfchrha5urcloep3j3q2s7'
     const logoutUri = "http://localhost:3000";
-    const cognitoDomain = "https://lucky-draw.auth.ap-southeast-2.amazoncognito.com";
+    const cognitoDomain = "https://lucky-draw-dev.auth.ap-southeast-2.amazoncognito.com";
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
+
+  const signIn = () => {
+    auth.signinRedirect()
+  }
+
+  const signOut = () => {
+    auth.removeUser()
+    signOutRedirect()
+  }
 
   if (auth.isLoading) {
     return <div>Loading...</div>;
@@ -37,24 +32,19 @@ const UserLogin = () => {
 
   if (auth.isAuthenticated) {
     return (
-      <div>
-        <pre> Hello: {auth.user?.profile.email} </pre>
-        <pre> ID Token: {auth.user?.id_token} </pre>
-        <pre> Access Token: {auth.user?.access_token} </pre>
-        <pre> Refresh Token: {auth.user?.refresh_token} </pre>
-
-        <button onClick={() => auth.removeUser()}>Sign out</button>
-      </div>
+      <Box p={4} display="flex" alignItems="center" gap={4}>
+        Hello Mew,
+        <Button variant="outline" onClick={signOut}>Sign out</Button>
+      </Box>
     );
   }
 
   return (
-    <div>
-      <button onClick={() => auth.signinRedirect()}>Sign in</button>
-      <button onClick={() => signOutRedirect()}>Sign out</button>
-    </div>
+    <Box p={4}>
+      <Button variant="outline" onClick={signIn}>Sign in</Button>
+    </Box>
   );
 }
 
-export default Container
+export default UserLogin
 

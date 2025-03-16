@@ -1,5 +1,5 @@
+import { Box } from 'styled-system/jsx'
 import PrizeListItem from './PrizeListItem'
-import { Prize } from '@/types/prize'
 
 interface PrizeListProps {
   prizes: Prize[]
@@ -9,11 +9,11 @@ const PrizeList = (props: PrizeListProps) => {
   const { prizes } = props
 
   return (
-    <div className="flex flex-col">
+    <Box w="100%" display="flex" flexDir="column" className="flex flex-col">
       {prizes.map((prize) => (
-        <PrizeListItem key={prize.name} prize={prize} />
+        <PrizeListItem key={prize.Id} prize={prize} />
       ))}
-    </div>
+    </Box>
   )
 }
 

@@ -1,15 +1,31 @@
-import { Center } from "styled-system/jsx"
-import { fetchLuckyPoints } from "@/services/user"
-import LuckyDrawPool from "./LuckyDrawPool"
-import Image from 'next/image'
-import SorryImg from '@/assets/sorry.png'
+'use client'
 
-const LuckyDrawPage = async () => {
-  const luckyPoints = await fetchLuckyPoints()
+import { Center } from "styled-system/jsx"
+import { getUser } from "@/services/user"
+import LuckyDrawPool from "./LuckyDrawPool"
+import { useAuth } from "react-oidc-context"
+import { useEffect, useState } from "react"
+
+const LuckyDrawPage = () => {
+  const auth = useAuth()
+  const [luckyPoint, setLuckyPoint] = useState(0)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser(auth.user!.profile.sub)
+      setLuckyPoint(user.LuckyPoint)
+    }
+
+    console.log(auth)
+
+    if (auth.user) {
+      fetchUser()
+    }
+  }, [auth])
 
   return (
     <Center h="100%">
-      <LuckyDrawPool luckyPoints={luckyPoints} />
+      <LuckyDrawPool luckyPoints={luckyPoint} />
     </Center>
   )
 }
