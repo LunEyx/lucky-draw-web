@@ -6,10 +6,17 @@ interface ProvidersProps {
   children: React.ReactNode
 }
 
+let redirect_uri = 'http://localhost:3000'
+if (process.env.VERCEL_TARGET_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
+  redirect_uri = process.env.NEXT_PUBLIC_VERCEL_URL
+} else if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) {
+  redirect_uri = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL
+}
+
 const cognitoAuthConfig = {
   authority: process.env.NEXT_PUBLIC_COGNITO_AUTHORITY,
   client_id: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
-  redirect_uri: process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : 'http://localhost:3000',
+  redirect_uri: redirect_uri,
   response_type: "code",
   scope: "email openid",
 };
