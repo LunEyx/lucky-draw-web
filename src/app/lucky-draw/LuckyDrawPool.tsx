@@ -20,7 +20,8 @@ const toaster = Toast.createToaster({
 const LuckyDrawPool = (props: LuckyDrawPoolProps) => {
   const { luckyPoints } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [prizeImage, setPrizeImage] = useState('')
+  const [prize, setPrize] = useState<Prize>({} as Prize)
+  const [inventoryId, setInventoryId] = useState('')
 
   const onDialogOpenChange = (details: DialogOpenChangeDetails) => {
     if (details.open) {
@@ -37,14 +38,15 @@ const LuckyDrawPool = (props: LuckyDrawPoolProps) => {
           <LuckyDrawButton
             luckyPoints={luckyPoints}
             toaster={toaster}
-            setPrizeImage={setPrizeImage}
+            setPrize={setPrize}
+            setInventoryId={setInventoryId}
             openDialog={() => setIsDialogOpen(true)}
           />
           <Box>持有的幸運點：{luckyPoints}</Box>
         </HStack>
       </Box>
 
-      <LuckyDrawDialog image={prizeImage} open={isDialogOpen} onOpenChange={onDialogOpenChange} />
+      <LuckyDrawDialog prize={prize} inventoryId={inventoryId} open={isDialogOpen} onOpenChange={onDialogOpenChange} />
 
       <Toast.Toaster toaster={toaster}>
         {(toast) => (

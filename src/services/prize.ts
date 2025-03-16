@@ -33,3 +33,28 @@ export const updatePrize = async (idToken: string, prize: Prize) => {
   })
   return await response.json()
 }
+
+export const drawPrize = async (idToken: string) => {
+  const response = await fetch(`${API_URL}/prizes/draw`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${idToken}`,
+      'Content-Type': 'application/json'
+    },
+  })
+  return await response.json()
+}
+
+export const redeemPrize = async (idToken: string, id: string) => {
+  const response = await fetch(`${API_URL}/prizes/redeem`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${idToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id
+    })
+  })
+  return await response.json()
+}

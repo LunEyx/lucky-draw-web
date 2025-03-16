@@ -9,11 +9,12 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
 type LuckyDrawDialogProps = {
-  image: string
+  prize: Prize
+  inventoryId: string
 } & Dialog.RootProps
 
 const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
-  const { image, ...dialogRootProps } = props
+  const { prize, inventoryId, ...dialogRootProps } = props
   const [step, setStep] = useState(1)
 
   useEffect(() => {
@@ -49,8 +50,8 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           )}
           {step === 2 && (
             <VStack h="100%" justify="space-around">
-              {image ? (
-                <img src={image} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
+              {prize.ImageURL ? (
+                <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
               ) : (
                 <Skeleton h="75%" aspectRatio={1} />
               )}
@@ -59,8 +60,8 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           )}
           {step === 3 && (
             <VStack h="100%" justify="space-around">
-              {image ? (
-                <img src={image} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
+              {prize.ImageURL ? (
+                <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
               ) : (
                 <Skeleton h="75%" aspectRatio={1} />
               )}

@@ -1,18 +1,18 @@
 import { Button } from '@/components/ui/button'
 import { CreateToasterReturn } from '@ark-ui/react'
-import PrizeJson from './prize.json'
 
 interface LuckyDrawButtonProps {
   luckyPoints: number,
   toaster: CreateToasterReturn
-  setPrizeImage: (image: string) => void
+  setInventoryId: (inventoryId: string) => void
+  setPrize: (prize: Prize) => void
   openDialog: () => void
 }
 
 const LuckyDrawButton = (props: LuckyDrawButtonProps) => {
-  const { luckyPoints, toaster, setPrizeImage, openDialog } = props
+  const { luckyPoints, toaster, setPrize, openDialog } = props
 
-  const onDrawClick = () => {
+  const onDrawClick = async () => {
     if (luckyPoints < 1) {
       toaster.create({
         title: '幸運點不足',
@@ -22,8 +22,9 @@ const LuckyDrawButton = (props: LuckyDrawButtonProps) => {
       return
     }
 
-    const randomPrize = PrizeJson[Math.floor(Math.random() * PrizeJson.length)]
-    setPrizeImage(randomPrize.image)
+    const item = await drawPrize()
+    setPrize(item.Prize)
+    setInventoryId(item.Id)
     openDialog()
   }
 
