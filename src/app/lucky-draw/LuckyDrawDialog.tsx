@@ -7,6 +7,7 @@ import Walk1Img from '@/assets/walk1.png'
 import Walk2Img from '@/assets/walk2.png'
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
+import { QrCode } from "@ark-ui/react"
 
 type LuckyDrawDialogProps = {
   prize: Prize
@@ -14,7 +15,7 @@ type LuckyDrawDialogProps = {
 } & Dialog.RootProps
 
 const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
-  const { prize, ...dialogRootProps } = props
+  const { prize, inventoryId, ...dialogRootProps } = props
   const [step, setStep] = useState(1)
 
   useEffect(() => {
@@ -61,12 +62,11 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           )}
           {step === 3 && (
             <VStack h="100%" justify="space-around">
-              {prize.ImageURL ? (
-                // eslint-disable-next-line
-                <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
-              ) : (
-                <Skeleton h="75%" aspectRatio={1} />
-              )}
+              <QrCode.Root style={{ width: '75%', height: '75%' }} defaultValue={`${process.env.NEXT_PUBLIC_VERCEL_URL ? 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL : 'http://localhost:3000'}/admin/prizes/redeem/${inventoryId}`}>
+                <QrCode.Frame>
+                  <QrCode.Pattern />
+                </QrCode.Frame>
+              </QrCode.Root>
               <Dialog.CloseTrigger asChild>
                 <Button variant="solid" size="lg">好耶！</Button>
               </Dialog.CloseTrigger>

@@ -7,9 +7,9 @@ interface ProvidersProps {
 }
 
 const cognitoAuthConfig = {
-  authority: "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_DnLm5Gq3Y",
-  client_id: "5800gfchrha5urcloep3j3q2s7",
-  redirect_uri: process.env.NEXT_PUBLIC_APP_URL as string,
+  authority: process.env.NEXT_PUBLIC_COGNITO_AUTHORITY,
+  client_id: process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID,
+  redirect_uri: process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : 'http://localhost:3000',
   response_type: "code",
   scope: "email openid",
 };
