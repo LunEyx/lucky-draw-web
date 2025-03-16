@@ -14,7 +14,7 @@ type LuckyDrawDialogProps = {
 } & Dialog.RootProps
 
 const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
-  const { prize, inventoryId, ...dialogRootProps } = props
+  const { prize, ...dialogRootProps } = props
   const [step, setStep] = useState(1)
 
   useEffect(() => {
@@ -51,7 +51,8 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           {step === 2 && (
             <VStack h="100%" justify="space-around">
               {prize.ImageURL ? (
-                <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
+                // eslint-disable-next-line
+                <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%', filter: 'invert(1) grayscale(1) contrast(1.5)' }} />
               ) : (
                 <Skeleton h="75%" aspectRatio={1} />
               )}
@@ -61,6 +62,7 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           {step === 3 && (
             <VStack h="100%" justify="space-around">
               {prize.ImageURL ? (
+                // eslint-disable-next-line
                 <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
               ) : (
                 <Skeleton h="75%" aspectRatio={1} />

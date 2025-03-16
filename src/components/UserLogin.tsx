@@ -8,7 +8,7 @@ const UserLogin = () => {
 
   const signOutRedirect = () => {
     const clientId = '5800gfchrha5urcloep3j3q2s7'
-    const logoutUri = "http://localhost:3000";
+    const logoutUri = process.env.NEXT_PUBLIC_APP_URL as string
     const cognitoDomain = "https://lucky-draw-dev.auth.ap-southeast-2.amazoncognito.com";
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };

@@ -9,7 +9,7 @@ interface ProvidersProps {
 const cognitoAuthConfig = {
   authority: "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_DnLm5Gq3Y",
   client_id: "5800gfchrha5urcloep3j3q2s7",
-  redirect_uri: "http://localhost:3000",
+  redirect_uri: process.env.NEXT_PUBLIC_APP_URL as string,
   response_type: "code",
   scope: "email openid",
 };

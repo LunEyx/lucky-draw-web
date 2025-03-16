@@ -24,6 +24,7 @@ const shouldForwardProp = (prop: string, variantKeys: string[], options: Options
 export const createStyleContext = <R extends Recipe>(recipe: R) => {
   const StyleContext = createContext<Record<Slot<R>, string> | null>(null)
 
+  // eslint-disable-next-line
   const withRootProvider = <P extends {}>(Component: ElementType) => {
     const StyledComponent = (props: P) => {
       const [variantProps, otherProps] = recipe.splitVariantProps(props)
@@ -64,7 +65,7 @@ export const createStyleContext = <R extends Recipe>(recipe: R) => {
         </StyleContext.Provider>
       )
     })
-    // @ts-expect-error
+    // @ts-expect-error name does not exist
     StyledSlotProvider.displayName = Component.displayName || Component.name
 
     return StyledSlotProvider
@@ -81,7 +82,7 @@ export const createStyleContext = <R extends Recipe>(recipe: R) => {
         <StyledComponent {...props} ref={ref} className={cx(slotStyles?.[slot], props.className)} />
       )
     })
-    // @ts-expect-error
+    // @ts-expect-error name does not exist
     StyledSlotComponent.displayName = Component.displayName || Component.name
 
     return StyledSlotComponent

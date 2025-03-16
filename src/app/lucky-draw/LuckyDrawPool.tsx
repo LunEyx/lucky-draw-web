@@ -9,7 +9,8 @@ import LuckyDrawDialog from './LuckyDrawDialog'
 import { DialogOpenChangeDetails } from "@ark-ui/react"
 
 interface LuckyDrawPoolProps {
-  luckyPoints: number
+  luckyPoint: number
+  setLuckyPoint: (luckyPoint: number) => void
 }
 
 const toaster = Toast.createToaster({
@@ -18,7 +19,7 @@ const toaster = Toast.createToaster({
 })
 
 const LuckyDrawPool = (props: LuckyDrawPoolProps) => {
-  const { luckyPoints } = props
+  const { luckyPoint, setLuckyPoint } = props
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [prize, setPrize] = useState<Prize>({} as Prize)
   const [inventoryId, setInventoryId] = useState('')
@@ -36,13 +37,14 @@ const LuckyDrawPool = (props: LuckyDrawPoolProps) => {
       <Box shadow="2xl" p="4" bg="white" borderRadius="2xl">
         <HStack>
           <LuckyDrawButton
-            luckyPoints={luckyPoints}
+            luckyPoint={luckyPoint}
             toaster={toaster}
+            setLuckyPoint={setLuckyPoint}
             setPrize={setPrize}
             setInventoryId={setInventoryId}
             openDialog={() => setIsDialogOpen(true)}
           />
-          <Box>持有的幸運點：{luckyPoints}</Box>
+          <Box>持有的幸運點：{luckyPoint}</Box>
         </HStack>
       </Box>
 

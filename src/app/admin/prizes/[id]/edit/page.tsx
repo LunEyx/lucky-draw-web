@@ -56,7 +56,7 @@ const EditPrizePage = () => {
           <Box flex={1}>
             <SelectField label="Tier" collection={collection} value={[prize.Tier]} onValueChange={(event) => setPrize((prev) => ({ ...prev, Tier: event.value[0] }))} />
           </Box>
-          <NumericField flex={1} label="Count" value={prize.Count} onChange={(event) => setPrize((prev) => ({ ...prev, Count: Number(event.target.value) }))} />
+          <NumericField flex={1} label="Count" value={prize.Count.toString()} onChange={(event) => setPrize((prev) => ({ ...prev, Count: Number(event.target.value) }))} />
         </HStack>
         <HStack w="100%">
           <CheckboxField flex={1} label="Drawable" checked={prize.IsDrawable} onChange={(event) => setPrize((prev) => ({ ...prev, IsDrawable: event.target.checked }))} />

@@ -25,7 +25,7 @@ const LuckyDrawPage = () => {
 
   return (
     <Center h="100%">
-      <LuckyDrawPool luckyPoints={luckyPoint} />
+      <LuckyDrawPool setLuckyPoint={setLuckyPoint} luckyPoint={luckyPoint} />
     </Center>
   )
 }

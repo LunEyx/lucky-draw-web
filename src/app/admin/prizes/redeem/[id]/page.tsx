@@ -1,3 +1,5 @@
+'use client'
+
 import { redeemPrize } from "@/services/prize"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
