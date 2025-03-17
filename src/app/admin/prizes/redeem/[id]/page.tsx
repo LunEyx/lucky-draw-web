@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from "@/components/ui/button"
 import { redeemPrize } from "@/services/prize"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -17,7 +18,7 @@ const RedeemPage = () => {
       try {
         const idToken = auth.user!.id_token as string
         const response = await redeemPrize(idToken, id as string)
-        setMessage(response.message)
+        setMessage(JSON.stringify(response))
       } catch (err) {
         console.log(err)
         setMessage('Failed to redeem')
@@ -31,6 +32,9 @@ const RedeemPage = () => {
   }, [id, auth])
   return (
     <Center h="100vh">
+      {!auth.isLoading && !auth.isAuthenticated && (
+        <Button onClick={() => auth.signinRedirect()}>Login</Button>
+      )}
       <Box>{message}</Box>
     </Center>
   )
