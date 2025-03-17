@@ -8,9 +8,9 @@ interface ProvidersProps {
 
 let redirect_uri = 'http://localhost:3000'
 if (process.env.VERCEL_TARGET_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
-  redirect_uri = process.env.NEXT_PUBLIC_VERCEL_URL
+  redirect_uri = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
 } else if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) {
-  redirect_uri = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL
+  redirect_uri = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
 }
 
 const cognitoAuthConfig = {
