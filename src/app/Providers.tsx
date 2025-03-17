@@ -7,6 +7,10 @@ interface ProvidersProps {
 }
 
 let redirect_uri = 'http://localhost:3000'
+console.log('VERCEL_ENV', process.env.NEXT_PUBLIC_VERCEL_ENV)
+console.log('VERCEL_TARGET_ENV', process.env.NEXT_PUBLIC_VERCEL_TARGET_ENV)
+console.log('VERCEL_URL', process.env.NEXT_PUBLIC_VERCEL_URL)
+console.log('VERCEL_PROJECT_PRODUCTION_URL', process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL)
 if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
   redirect_uri = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
 } else if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) {
