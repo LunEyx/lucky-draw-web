@@ -14,6 +14,14 @@ type LuckyDrawDialogProps = {
   inventoryId: string
 } & Dialog.RootProps
 
+let APP_URL = 'http://localhost:3000'
+if (process.env.VERCEL_TARGET_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
+  APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+} else if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) {
+  APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
+}
+
+
 const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
   const { prize, inventoryId, ...dialogRootProps } = props
   const [step, setStep] = useState(1)
@@ -62,7 +70,7 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           )}
           {step === 3 && (
             <VStack h="100%" justify="space-around">
-              <QrCode.Root style={{ width: '75%', height: '75%' }} defaultValue={`${process.env.NEXT_PUBLIC_VERCEL_URL ? 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL : 'http://localhost:3000'}/admin/prizes/redeem/${inventoryId}`}>
+              <QrCode.Root style={{ width: '75%', height: '75%' }} defaultValue={`${APP_URL}/admin/prizes/redeem/${inventoryId}`}>
                 <QrCode.Frame>
                   <QrCode.Pattern />
                 </QrCode.Frame>
