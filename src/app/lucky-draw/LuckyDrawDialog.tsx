@@ -15,10 +15,10 @@ type LuckyDrawDialogProps = {
 } & Dialog.RootProps
 
 let APP_URL = 'http://localhost:3000'
-if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
-  APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-} else if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) {
-  APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
+if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
+  APP_URL = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL!
+} else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
+  APP_URL = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL!
 }
 
 

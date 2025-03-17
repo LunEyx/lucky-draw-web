@@ -8,7 +8,7 @@ interface ProvidersProps {
 
 let redirect_uri = 'http://localhost:3000'
 if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
-  redirect_uri = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  redirect_uri = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
 } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
   redirect_uri = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
 }
