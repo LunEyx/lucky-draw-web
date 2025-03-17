@@ -15,9 +15,7 @@ type LuckyDrawDialogProps = {
 } & Dialog.RootProps
 
 let APP_URL = 'http://localhost:3000'
-console.log(process.env)
-console.log(process.env.VERCEL_ENV)
-if (process.env.VERCEL_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
+if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && process.env.NEXT_PUBLIC_VERCEL_URL) {
   APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
 } else if (process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL) {
   APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
