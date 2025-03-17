@@ -57,29 +57,25 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
               </Box>
             </>
           )}
-          {step === 2 && (
-            <VStack h="100%" justify="space-around">
-              {prize.ImageURL ? (
-                // eslint-disable-next-line
-                <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%', filter: 'invert(1) grayscale(1) contrast(1.5)' }} />
-              ) : (
-                <Skeleton h="75%" aspectRatio={1} />
-              )}
-              <Button variant="solid" size="lg" onClick={nextStep}>換領！</Button>
-            </VStack>
-          )}
-          {step === 3 && (
-            <VStack h="100%" justify="space-around">
-              <QrCode.Root style={{ width: '75%', height: '75%' }} defaultValue={`${APP_URL}/admin/prizes/redeem/${inventoryId}`}>
-                <QrCode.Frame>
-                  <QrCode.Pattern />
-                </QrCode.Frame>
-              </QrCode.Root>
-              <Dialog.CloseTrigger asChild>
-                <Button variant="solid" size="lg">好耶！</Button>
-              </Dialog.CloseTrigger>
-            </VStack>
-          )}
+          <VStack h="100%" justify="space-around" hidden={step !== 2}>
+            {prize.ImageURL ? (
+              // eslint-disable-next-line
+              <img src={prize.ImageURL} alt="reward" style={{ width: '75%', height: '100%', maxHeight: '75%' }} />
+            ) : (
+              <Skeleton h="75%" aspectRatio={1} />
+            )}
+            <Button variant="solid" size="lg" onClick={nextStep}>換領！</Button>
+          </VStack>
+          <VStack h="100%" justify="space-around" hidden={step !== 3}>
+            <QrCode.Root style={{ width: '75%', height: '75%' }} defaultValue={`${APP_URL}/admin/prizes/redeem/${inventoryId}`}>
+              <QrCode.Frame>
+                <QrCode.Pattern />
+              </QrCode.Frame>
+            </QrCode.Root>
+            <Dialog.CloseTrigger asChild>
+              <Button variant="solid" size="lg">之後再換領！</Button>
+            </Dialog.CloseTrigger>
+          </VStack>
         </Dialog.Content>
       </Dialog.Positioner>
     </Dialog.Root >
