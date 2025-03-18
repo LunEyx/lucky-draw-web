@@ -11,6 +11,7 @@ const globalCss = defineGlobalStyles({
     minH: '100vh',
     h: 0,
     overflowX: 'hidden',
+    fontSize: '24px',
   }
 })
 

@@ -1,3 +1,5 @@
+import { revalidateTag } from "next/cache"
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export const createPrize = async (idToken: string, prize: Prize) => {
@@ -9,11 +11,12 @@ export const createPrize = async (idToken: string, prize: Prize) => {
     },
     body: JSON.stringify(prize)
   })
+  revalidateTag('prizes')
   return await response.json()
 }
 
 export const getPrizes = async () => {
-  const response = await fetch(`${API_URL}/prizes`)
+  const response = await fetch(`${API_URL}/prizes`, { next: { tags: ['prizes'] } })
   return await response.json()
 }
 
@@ -31,6 +34,7 @@ export const updatePrize = async (idToken: string, prize: Prize) => {
     },
     body: JSON.stringify(prize)
   })
+  revalidateTag('prizes')
   return await response.json()
 }
 

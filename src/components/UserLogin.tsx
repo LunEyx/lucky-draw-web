@@ -11,9 +11,9 @@ const UserLogin = () => {
     const clientId = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID
     let logoutUri = 'http://localhost:3000'
     if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
-      logoutUri = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL!
+      logoutUri = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL!}`
     } else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
-      logoutUri = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL!
+      logoutUri = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL!}`
     }
     const cognitoDomain = process.env.NEXT_PUBLIC_COGNITO_DOMAIN
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
