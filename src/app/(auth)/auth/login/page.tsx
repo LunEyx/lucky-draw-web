@@ -3,12 +3,12 @@ import AutoLogin from "@/components/AutoLogin"
 import { redirect } from "next/navigation"
 
 interface LoginPageProps {
-  searchParams: { [key: string]: string }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 const LoginPage = async (props: LoginPageProps) => {
   const { searchParams } = props
-  const callbackUrl = searchParams['callbackUrl']
+  const callbackUrl = (await searchParams).callbackUrl as string | undefined
 
   const session = await getSession()
 
