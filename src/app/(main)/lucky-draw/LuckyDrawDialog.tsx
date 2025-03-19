@@ -8,19 +8,14 @@ import Walk2Img from '@/assets/walk2.png'
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { QrCode } from "@ark-ui/react"
+import { get_app_url } from "@/utils/url"
 
 type LuckyDrawDialogProps = {
   prize: Prize
   inventoryId: string
 } & Dialog.RootProps
 
-let APP_URL = 'http://localhost:3000'
-if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
-  APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL!}`
-} else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview') {
-  APP_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL!}`
-}
-
+const APP_URL = get_app_url()
 
 const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
   const { prize, inventoryId, ...dialogRootProps } = props

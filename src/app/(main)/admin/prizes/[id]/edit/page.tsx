@@ -1,26 +1,46 @@
 'use client'
 
+import CheckboxField from "@/components/form/CheckboxField"
 import InputField from "@/components/form/InputField"
 import NumericField from "@/components/form/NumericField"
-import CheckboxField from "@/components/form/CheckboxField"
-import { Box, Container, HStack, VStack } from "styled-system/jsx"
+import SelectField from "@/components/form/SelectField"
 import { Button } from "@/components/ui/button"
-import { useAuth } from "react-oidc-context"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { createPrize } from "@/services/prize"
+import { getPrize, updatePrize } from "@/services/prize"
+import { createListCollection } from "@ark-ui/react"
+import { useRouter, useParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import { Box, Container, HStack, VStack } from "styled-system/jsx"
 
-const CreatePrizePage = () => {
-  const auth = useAuth()
+const EditPrizePage = () => {
   const router = useRouter()
+  const params = useParams()
+  const id = params.id
 
   const [prize, setPrize] = useState({ Id: '', Name: '', ImageURL: '', Tier: '', Count: 0, IsDrawable: false } as Prize)
 
+  useEffect(() => {
+    const fetchPrize = async () => {
+      const prize = await getPrize(id as string)
+      setPrize(prize)
+    }
+
+    if (id) { // TODO: auth
+      fetchPrize()
+    }
+  }, [id])
 
   const onSubmit = async () => {
-    await createPrize(auth.user!.id_token as string, prize)
+    await updatePrize('idtoken', prize) // TODO: auth
     router.push('/admin/prizes')
   }
+
+  const collection = createListCollection({
+    items: [
+      { label: 'R', value: 'R' },
+      { label: 'SR', value: 'SR' },
+      { label: 'SSR', value: 'SSR' },
+    ]
+  })
 
   return (
     <Container>
@@ -30,7 +50,9 @@ const CreatePrizePage = () => {
           <InputField flex={1} label="Image URL" value={prize.ImageURL} onChange={(event) => setPrize((prev) => ({ ...prev, ImageURL: event.target.value }))} />
         </HStack>
         <HStack w="100%">
-          <InputField flex={1} label="Tier" value={prize.Tier} onChange={(event) => setPrize((prev) => ({ ...prev, Tier: event.target.value }))} />
+          <Box flex={1}>
+            <SelectField label="Tier" collection={collection} value={[prize.Tier]} onValueChange={(event) => setPrize((prev) => ({ ...prev, Tier: event.value[0] }))} />
+          </Box>
           <NumericField flex={1} label="Count" value={prize.Count.toString()} onChange={(event) => setPrize((prev) => ({ ...prev, Count: Number(event.target.value) }))} />
         </HStack>
         <HStack w="100%">
@@ -43,5 +65,4 @@ const CreatePrizePage = () => {
   )
 }
 
-export default CreatePrizePage
-
+export default EditPrizePage

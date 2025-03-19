@@ -10,7 +10,6 @@ import { DialogOpenChangeDetails } from "@ark-ui/react"
 
 interface LuckyDrawPoolProps {
   luckyPoint: number
-  setLuckyPoint: (luckyPoint: number) => void
 }
 
 const toaster = Toast.createToaster({
@@ -19,7 +18,8 @@ const toaster = Toast.createToaster({
 })
 
 const LuckyDrawPool = (props: LuckyDrawPoolProps) => {
-  const { luckyPoint, setLuckyPoint } = props
+  const { luckyPoint: serverLuckyPoint } = props
+  const [luckyPoint, setLuckyPoint] = useState(serverLuckyPoint)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [prize, setPrize] = useState<Prize>({} as Prize)
   const [inventoryId, setInventoryId] = useState('')

@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { drawPrize } from '@/services/prize'
 import { getUser } from '@/services/user'
 import { CreateToasterReturn } from '@ark-ui/react'
-import { useAuth } from 'react-oidc-context'
 
 interface LuckyDrawButtonProps {
   luckyPoint: number,
@@ -15,7 +14,6 @@ interface LuckyDrawButtonProps {
 
 const LuckyDrawButton = (props: LuckyDrawButtonProps) => {
   const { luckyPoint, toaster, setLuckyPoint, setInventoryId, setPrize, openDialog } = props
-  const auth = useAuth()
 
   const onDrawClick = async () => {
     if (luckyPoint < 1) {
@@ -27,11 +25,11 @@ const LuckyDrawButton = (props: LuckyDrawButtonProps) => {
       return
     }
 
-    const idToken = auth.user!.id_token as string
+    const idToken = '' // TODO: auth
     const item = await drawPrize(idToken)
     setPrize(item.Prize)
     setInventoryId(item.Id)
-    const user = await getUser(auth.user!.profile.sub)
+    const user = await getUser('') // TODO: auth
     setLuckyPoint(user.LuckyPoint)
     openDialog()
   }

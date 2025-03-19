@@ -5,12 +5,10 @@ import { redeemPrize } from "@/services/prize"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import { useAuth } from "react-oidc-context"
 import { Box, Center } from "styled-system/jsx"
 import { VStack } from "styled-system/jsx"
 
 const RedeemPage = () => {
-  const auth = useAuth()
   const params = useParams()
   const id = params.id!
   const [prize, setPrize] = useState<Prize>()
@@ -19,7 +17,7 @@ const RedeemPage = () => {
   useEffect(() => {
     const fetchRedeem = async () => {
       try {
-        const idToken = auth.user!.id_token as string
+        const idToken = 'idtoken' // TODO: auth
         const prize = await redeemPrize(idToken, id as string)
         setPrize(prize)
       } catch (err) {
@@ -28,15 +26,15 @@ const RedeemPage = () => {
       }
     }
 
-    if (id && auth.isAuthenticated) {
+    if (id) { // TODO: auth
       fetchRedeem()
     }
 
-  }, [id, auth])
+  }, [id])
   return (
     <Center h="100vh">
-      {!auth.isLoading && !auth.isAuthenticated && (
-        <Button onClick={() => auth.signinRedirect()}>Login</Button>
+      {( // TODO: auth
+        <Button onClick={() => { } /* signin */}>Login</Button>
       )}
       {error && (
         <Box>{error}</Box>
