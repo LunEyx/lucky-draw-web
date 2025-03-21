@@ -8,14 +8,14 @@ import { HStack } from 'styled-system/jsx';
 
 const UserLogin = async () => {
   const session = await getSession()
-  const user = session && await getUser(session.user.id)
+  const user = session && await (await getUser(session.user.id)).json()
 
   return (
     <Box p={4}>
       {session ? (
         <HStack>
           <SignOutButton />
-          {user.Name}
+          {user.name}
         </HStack>
       ) : (
         <SignInButton />

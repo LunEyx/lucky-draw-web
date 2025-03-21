@@ -6,12 +6,12 @@ import { Box, Center } from "styled-system/jsx"
 import { VStack } from "styled-system/jsx"
 
 interface RedeemPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 const RedeemPage = async (props: RedeemPageProps) => {
   const { params } = props
-  const id = params.id
+  const id = (await params).id
 
   const session = await getSession()
   if (!session) {

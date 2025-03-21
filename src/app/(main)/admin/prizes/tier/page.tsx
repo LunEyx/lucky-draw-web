@@ -4,7 +4,8 @@ import Image from "next/image"
 import { HStack, VStack } from "styled-system/jsx"
 
 const PrizeTierPage = async () => {
-  const prizes: Prize[] = await getPrizes()
+  const response = await getPrizes()
+  const prizes: Prize[] = await response.json()
 
   return (
     <VStack>

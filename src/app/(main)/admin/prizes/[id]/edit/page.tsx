@@ -2,12 +2,12 @@ import PrizeEditContainer from "@/components/prize/PrizeEditContainer"
 import { getPrize } from "@/services/prize"
 
 interface EditPrizePageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 const EditPrizePage = async (props: EditPrizePageProps) => {
   const { params } = props
-  const id = params.id
+  const id = (await params).id
 
   const response = await getPrize(id)
   const prize = await response.json()
