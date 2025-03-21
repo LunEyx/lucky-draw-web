@@ -29,7 +29,7 @@ const RedeemDialog = (props: RedeemDialogProps) => {
             {inventoryId && (
               <QrCode.Root
                 style={{ width: '75%', height: '75%' }}
-                defaultValue={`${APP_URL}/admin/prizes/redeem/${inventoryId}`}
+                defaultValue={`${APP_URL}/admin/prizes/${inventoryId}/redeem`}
               >
                 <QrCode.Frame>
                   <QrCode.Pattern />
