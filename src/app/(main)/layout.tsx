@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import UserLogin from '@/components/UserLogin'
 import Providers from '@/components/Providers'
 import { getSession } from '@/api/auth'
 import { Box, VStack } from 'styled-system/jsx'
 import './globals.css'
+import Menu from '@/components/menu/Menu'
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -27,7 +27,7 @@ const RootLayout = async (props: RootLayoutProps) => {
       <body>
         <Providers session={session}>
           <VStack minW="100vw" minH="100vh" p="32px">
-            <UserLogin />
+            <Menu />
             <Box flex="1 0 0">{children}</Box>
           </VStack>
         </Providers>
