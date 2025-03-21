@@ -1,5 +1,5 @@
 import { withAuth } from 'next-auth/middleware'
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'
 
 export default withAuth(
   function middleware() {
@@ -10,11 +10,11 @@ export default withAuth(
       authorized: ({ token }) => !!token, // Check if user is authenticated
     },
     pages: {
-      signIn: '/auth/login'
+      signIn: '/auth/login',
     },
-  }
+  },
 )
 
 export const config = {
-  matcher: ['/admin/:path*', '/lucky-draw']
+  matcher: ['/admin/:path*', '/lucky-draw', '/inventory'],
 }
