@@ -1,6 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { drawPrize } from '@/services/prize'
-import { getUser } from '@/services/user'
 import { CreateToasterReturn } from '@ark-ui/react'
 
 interface LuckyDrawButtonProps {
@@ -25,12 +23,13 @@ const LuckyDrawButton = (props: LuckyDrawButtonProps) => {
       return
     }
 
-    const idToken = '' // TODO: auth
-    const item = await drawPrize(idToken)
-    setPrize(item.Prize)
-    setInventoryId(item.Id)
-    const user = await getUser('') // TODO: auth
-    setLuckyPoint(user.LuckyPoint)
+    let response = await fetch('/api/prizes/draw')
+    const item = await response.json()
+    setPrize(item.prize)
+    setInventoryId(item.id)
+    response = await fetch('/api/users')
+    const user = await response.json()
+    setLuckyPoint(user.luckyPoint)
     openDialog()
   }
 

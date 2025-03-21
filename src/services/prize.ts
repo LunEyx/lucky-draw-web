@@ -1,7 +1,7 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.API_URL
 
 export const createPrize = async (idToken: string, prize: Prize) => {
-  const response = await fetch(`${API_URL}/prizes`, {
+  return fetch(`${API_URL}/prizes`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${idToken}`,
@@ -9,21 +9,18 @@ export const createPrize = async (idToken: string, prize: Prize) => {
     },
     body: JSON.stringify(prize)
   })
-  return await response.json()
 }
 
 export const getPrizes = async () => {
-  const response = await fetch(`${API_URL}/prizes`)
-  return await response.json()
+  return fetch(`${API_URL}/prizes`)
 }
 
 export const getPrize = async (id: string) => {
-  const response = await fetch(`${API_URL}/prizes/${id}`)
-  return await response.json()
+  return fetch(`${API_URL}/prizes/${id}`)
 }
 
 export const updatePrize = async (idToken: string, prize: Prize) => {
-  const response = await fetch(`${API_URL}/prizes/${prize.Id}`, {
+  return fetch(`${API_URL}/prizes/${prize.id}`, {
     method: 'PUT',
     headers: {
       'Authorization': `Bearer ${idToken}`,
@@ -31,22 +28,20 @@ export const updatePrize = async (idToken: string, prize: Prize) => {
     },
     body: JSON.stringify(prize)
   })
-  return await response.json()
 }
 
 export const drawPrize = async (idToken: string) => {
-  const response = await fetch(`${API_URL}/prizes/draw`, {
+  return fetch(`${API_URL}/prizes/draw`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${idToken}`,
       'Content-Type': 'application/json'
     },
   })
-  return await response.json()
 }
 
 export const redeemPrize = async (idToken: string, id: string) => {
-  const response = await fetch(`${API_URL}/prizes/redeem`, {
+  return fetch(`${API_URL}/prizes/redeem`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${idToken}`,
@@ -56,5 +51,4 @@ export const redeemPrize = async (idToken: string, id: string) => {
       id
     })
   })
-  return await response.json()
 }

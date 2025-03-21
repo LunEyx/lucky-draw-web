@@ -1,8 +1,8 @@
 interface Prize {
-  Id: string
-  Name: string
-  ImageURL: string
-  Tier: string
-  Count: number
-  IsDrawable: boolean
+  id: string
+  name: string
+  imageUrl: string
+  tier: string
+  count: number
+  isDrawable: boolean
 }

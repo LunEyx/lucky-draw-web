@@ -1,13 +1,13 @@
 'use client'
 
 import { Field } from "@/components/ui/field"
-import { ChangeEvent } from "react"
 import { Checkbox } from "../ui/checkbox"
+import { CheckboxCheckedChangeDetails } from "@ark-ui/react"
 
 interface CheckboxFieldProps extends Omit<Field.RootProps, 'onChange'> {
   label: string
   checked: boolean
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onChange: (details: CheckboxCheckedChangeDetails) => void
 }
 
 const CheckboxField = (props: CheckboxFieldProps) => {
@@ -16,11 +16,9 @@ const CheckboxField = (props: CheckboxFieldProps) => {
   return (
     <Field.Root {...fieldRootProps}>
       <Field.Label>{label}</Field.Label>
-      <Field.Input type="checkbox" checked={checked} onChange={onChange} asChild>
-        <Checkbox >
-          IsDrawable
-        </Checkbox>
-      </Field.Input>
+      <Checkbox checked={checked} onCheckedChange={onChange} >
+        IsDrawable
+      </Checkbox>
     </Field.Root>
   )
 }

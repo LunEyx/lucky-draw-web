@@ -5,7 +5,8 @@ import Link from "next/link"
 import { Box, Container } from "styled-system/jsx"
 
 const AdminPrizesPage = async () => {
-  const prizes = await getPrizes()
+  const response = await getPrizes()
+  const prizes = await response.json()
 
   return (
     <Container>

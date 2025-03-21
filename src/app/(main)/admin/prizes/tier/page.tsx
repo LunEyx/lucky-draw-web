@@ -10,20 +10,20 @@ const PrizeTierPage = async () => {
     <VStack>
       <FormLabel>SSR</FormLabel>
       <HStack>
-        {prizes.filter((prize) => prize.Tier === 'SSR').map((prize) => (
-          <Image key={prize.Id} src={prize.ImageURL} alt={prize.Id} width={32 * 4} height={32 * 4} />
+        {prizes.filter((prize) => prize.tier === 'SSR').map((prize) => (
+          <Image key={prize.id} src={prize.imageUrl} alt={prize.id} width={32 * 4} height={32 * 4} />
         ))}
       </HStack>
       <FormLabel>SR</FormLabel>
       <HStack>
-        {prizes.filter((prize) => prize.Tier === 'SR').map((prize) => (
-          <Image key={prize.Id} src={prize.ImageURL} alt={prize.Id} width={32 * 4} height={32 * 4} />
+        {prizes.filter((prize) => prize.tier === 'SR').map((prize) => (
+          <Image key={prize.id} src={prize.imageUrl} alt={prize.id} width={32 * 4} height={32 * 4} />
         ))}
       </HStack>
       <FormLabel>R</FormLabel>
       <HStack>
-        {prizes.filter((prize) => prize.Tier === 'R').map((prize) => (
-          <Image key={prize.Id} src={prize.ImageURL} alt={prize.Id} width={32 * 4} height={32 * 4} />
+        {prizes.filter((prize) => prize.tier === 'R').map((prize) => (
+          <Image key={prize.id} src={prize.imageUrl} alt={prize.id} width={32 * 4} height={32 * 4} />
         ))}
       </HStack>
     </VStack>

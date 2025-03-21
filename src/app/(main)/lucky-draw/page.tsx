@@ -6,11 +6,11 @@ import { getSession } from "@/api/auth"
 const LuckyDrawPage = async () => {
   const session = await getSession()
 
-  const user = session && await getUser(session.user.id)
+  const user = session && await (await getUser(session.user.id)).json()
 
   return (
     <Center h="100%">
-      <LuckyDrawPool luckyPoint={user.LuckyPoint} />
+      <LuckyDrawPool luckyPoint={user.luckyPoint} />
     </Center>
   )
 }

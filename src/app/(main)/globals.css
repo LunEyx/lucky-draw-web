@@ -7,7 +7,7 @@
 
 @keyframes tokageWalkAnimation1 {
 	from { left: 110%; }
-	to { left: -90%; }
+	to { left: -15%; }
 }
 
 @keyframes tokageWalkAnimation2 {
@@ -20,5 +20,5 @@
 	61% { opacity: 0; }
 	80% { opacity: 0; }
 	81% { opacity: 1; }
-	to { opacity: 1; left: -90%; }
+	to { opacity: 1; left: -15%; }
 }

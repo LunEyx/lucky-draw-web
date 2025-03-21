@@ -11,7 +11,7 @@ const PrizeList = (props: PrizeListProps) => {
   return (
     <Box w="100%" display="flex" flexDir="column" className="flex flex-col">
       {prizes.map((prize) => (
-        <PrizeListItem key={prize.Id} prize={prize} />
+        <PrizeListItem key={prize.id} prize={prize} />
       ))}
     </Box>
   )
