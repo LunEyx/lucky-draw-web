@@ -11,7 +11,7 @@ const UserLogin = async () => {
   const user = session && await (await getUser(session.user.id)).json()
 
   return (
-    <Box p={4}>
+    <Box p={4} w="full">
       {session ? (
         <HStack>
           <SignOutButton />

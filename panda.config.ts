@@ -1,4 +1,4 @@
-import { defineConfig, defineGlobalStyles } from "@pandacss/dev";
+import { defineConfig, defineGlobalStyles, definePreset } from "@pandacss/dev";
 import pandaPreset from '@pandacss/preset-panda'
 import { createPreset } from '@park-ui/panda-preset'
 import blue from '@park-ui/panda-preset/colors/blue'
@@ -6,12 +6,15 @@ import sand from '@park-ui/panda-preset/colors/sand'
 
 const globalCss = defineGlobalStyles({
   'html, body': {
+    fontSize: '24px',
+    color: 'rgb(116, 101, 80)'
+  },
+  'body': {
     bg: '#f0f5f4',
     minW: '100vw',
     minH: '100vh',
     h: 0,
     overflowX: 'hidden',
-    fontSize: '24px',
   }
 })
 
