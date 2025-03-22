@@ -5,6 +5,7 @@ import { getSession } from '@/api/auth'
 import { Box, VStack } from 'styled-system/jsx'
 import './globals.css'
 import Menu from '@/components/menu/Menu'
+import DailyBonusDialogContainer from '@/components/daily-bonus/DailyBonusDialogContainer'
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -30,6 +31,7 @@ const RootLayout = async (props: RootLayoutProps) => {
             <Menu />
             <Box flex="1 0 0">{children}</Box>
           </VStack>
+          <DailyBonusDialogContainer />
         </Providers>
       </body>
     </html>

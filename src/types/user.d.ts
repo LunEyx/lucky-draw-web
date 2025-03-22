@@ -4,5 +4,6 @@ interface User {
   email: string
   isAdmin: boolean
   luckyPoint: number
-  lastLoginAt: string
+  lastLoginTimestamp: string
+  totalLoginDays: number
 }
