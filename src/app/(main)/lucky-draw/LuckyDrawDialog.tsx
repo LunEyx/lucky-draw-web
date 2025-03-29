@@ -42,6 +42,12 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
     }, 1000)
   }
 
+  const colors = {
+    R: '192, 192, 192',
+    SR: '153, 196, 210',
+    SSR: '255, 250, 205',
+  } as { [key: string]: string }
+
   return (
     <Dialog.Root
       closeOnEscape={false}
@@ -126,11 +132,17 @@ const LuckyDrawDialog = (props: LuckyDrawDialogProps) => {
           )}
           <VStack h="100%" justify="space-around" hidden={step !== 2}>
             {prize.imageUrl ? (
-              // eslint-disable-next-line
+              /* eslint-disable-next-line */
               <img
                 src={prize.imageUrl}
                 alt="reward"
-                style={{ width: '75%', height: '100%', maxHeight: '75%' }}
+                style={{
+                  width: '75%',
+                  height: '75%',
+                  padding: '15px',
+                  borderRadius: '15px',
+                  border: `5px solid rgb(${colors[prize.tier]})`,
+                }}
               />
             ) : (
               <Skeleton h="75%" aspectRatio={1} />
